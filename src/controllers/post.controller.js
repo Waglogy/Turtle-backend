@@ -1,9 +1,9 @@
-const { BlogModel } = require("../models/blog.model")
+const { PostModel } = require("../models/post.model")
 const asyncErrorHandler = require("../utils/asyncErrorHandler")
 const { imageUploader, imageRemover } = require("../utils/imageHandler")
 const mongoose = require("mongoose")
 
-const postBlog = asyncErrorHandler(async (req, res) => {
+const addPost = asyncErrorHandler(async (req, res) => {
     const { title, content } = req.body
 
     if (!title || !content || !req.files)
@@ -21,7 +21,7 @@ const postBlog = asyncErrorHandler(async (req, res) => {
         imageId.push(image.public_id)
     }
 
-    await BlogModel.create({
+    await PostModel.create({
         title,
         content,
         image: imageUrl,
@@ -31,25 +31,25 @@ const postBlog = asyncErrorHandler(async (req, res) => {
     res.redirect("/posts")
 })
 
-const renderBlog = asyncErrorHandler(async (req, res) => {
-    res.render("blog", {
+const renderPost = asyncErrorHandler(async (req, res) => {
+    res.render("addpost", {
         data: null,
     })
 })
 
-const getBlogs = asyncErrorHandler(async (req, res) => {
-    const blogs = await BlogModel.find()
+const getPosts = asyncErrorHandler(async (req, res) => {
+    const posts = await PostModel.find()
 
-    if (!blogs.length)
+    if (!posts.length)
         return res.status(404).json({
-            message: "No blogs found",
+            message: "No posts found",
             status: false,
         })
 
     res.status(200).json({
-        message: "Blogs fetched successfully",
+        message: "Posts fetched successfully",
         status: true,
-        data: blogs,
+        data: posts,
     })
 })
 
@@ -62,7 +62,7 @@ const deletePost = asyncErrorHandler(async (req, res) => {
         })
     }
 
-    const result = await BlogModel.findByIdAndDelete(id)
+    const result = await PostModel.findByIdAndDelete(id)
 
     if (result === null) {
         return res.status(StatusCodes.NOT_FOUND).json({
@@ -82,8 +82,8 @@ const deletePost = asyncErrorHandler(async (req, res) => {
 })
 
 module.exports = {
-    postBlog,
-    renderBlog,
-    getBlogs,
+    addPost,
+    renderPost,
+    getPosts,
     deletePost,
 }

@@ -4,27 +4,30 @@ const { contactRoutes } = require("./contact.routes")
 const { signinRoutes } = require("./signin.routes")
 const checkAuth = require("../middleware/checkAuth.middleware")
 const isLoggedIn = require("../middleware/isLoggedIn.middleware")
-const { blogRoute } = require("./blog.routes")
-const { BlogModel } = require("../models/blog.model")
+const { postRoute } = require("./post.routes")
+const { PostModel } = require("../models/post.model")
 const { tableRoutes } = require("./table_booking.routes")
 const { getBookings } = require("../controllers/table.controller")
+const { getPosts } = require("../controllers/post.controller")
 
 mainRoutes.use("/auth", checkAuth, signinRoutes)
 
+mainRoutes.route("/all-posts").get(getPosts)
+
+mainRoutes.use("/", isLoggedIn, dashboardRoutes)
+
 mainRoutes.use("/contact", contactRoutes)
 
-mainRoutes.use("/blog", blogRoute)
+mainRoutes.use("/addpost", postRoute)
 
 mainRoutes.use("/book-table", tableRoutes)
 
 mainRoutes.route("/bookings").get(getBookings)
 
-mainRoutes.route("/posts").get(async (req, res) => {
-    const blogs = await BlogModel.find()
-    res.render("posts", { data: blogs })
+mainRoutes.get("/posts", isLoggedIn, async (req, res) => {
+    const posts = await PostModel.find()
+    res.render("posts", { data: posts })
 })
-
-mainRoutes.use("/", isLoggedIn, dashboardRoutes)
 
 mainRoutes.route("/logout").get((req, res) => {
     req.logout((err) => {

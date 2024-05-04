@@ -1,4 +1,6 @@
 const cloudinary = require("cloudinary").v2
+const AppError = require("./ApiError")
+const { StatusCodes } = require("http-status-codes")
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
