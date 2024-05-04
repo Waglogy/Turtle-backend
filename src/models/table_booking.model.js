@@ -5,6 +5,7 @@ const tableBookingSchema = mongoose.Schema(
         name: {
             type: String,
             required: true,
+            trim: true,
         },
         phone: {
             type: Number,
@@ -13,6 +14,11 @@ const tableBookingSchema = mongoose.Schema(
         number_of_people: {
             type: Number,
             required: true,
+        },
+        special_request: {
+            type: String,
+            required: true,
+            trim: true,
         },
     },
     { timestamps: true }

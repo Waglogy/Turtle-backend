@@ -1,12 +1,17 @@
 const {
-  getContacts,
-  deleteContact,
-} = require("../controllers/contact.controller");
+    getContacts,
+    deleteContact,
+    createContact,
+} = require("../controllers/contact.controller")
 
-const contactRoutes = require("express").Router();
+const isLoggedIn = require("../middleware/isLoggedIn.middleware")
 
-contactRoutes.route("/").get(getContacts);
+const contactRoutes = require("express").Router()
 
-contactRoutes.route("/:id").delete(deleteContact);
+contactRoutes.route("/").get(isLoggedIn, getContacts)
 
-module.exports = { contactRoutes };
+contactRoutes.route("/").post(createContact)
+
+contactRoutes.route("/:id").delete(isLoggedIn, deleteContact)
+
+module.exports = { contactRoutes }

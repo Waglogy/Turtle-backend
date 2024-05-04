@@ -5,6 +5,8 @@ const path = require("path")
 const passport = require("passport")
 const { mainRoutes } = require("./routes/main.routes")
 const expressSessions = require("express-session")
+const cors = require("cors")
+const ApiError = require("./utils/ApiError")
 
 require("./strategy/local.strategy")
 
@@ -20,6 +22,12 @@ app.use(
             httpOnly: true,
             // secure: true,
         },
+    })
+)
+
+app.use(
+    cors({
+        origin: process.env.CORS_ORIGIN,
     })
 )
 
@@ -39,7 +47,16 @@ app.all("*", (req, res) => {
 })
 
 app.use((err, req, res, next) => {
-    res.status(500).json("Internal Server Error" + err.message)
+    if (err instanceof ApiError)
+        res.status(err.statusCode).json({
+            status: false,
+            message: err.message,
+        })
+    else
+        res.status(500).json({
+            status: false,
+            message: "Internal Server Error",
+        })
 })
 
 module.exports = { app }

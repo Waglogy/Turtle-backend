@@ -3,8 +3,8 @@ const { TableBookingModel } = require("../models/table_booking.model")
 const { StatusCodes } = require("http-status-codes")
 
 const bookTable = asyncErrorHandler(async (req, res) => {
-    const { name, phone, number_of_people } = req.body
-    if (!name || !phone || !number_of_people)
+    const { name, phone, number_of_people, special_request } = req.body
+    if (!name || !phone || !number_of_people || special_request)
         return res
             .status(StatusCodes.BAD_REQUEST)
             .json({ message: "Please fill in all fields", success: false })
@@ -13,6 +13,7 @@ const bookTable = asyncErrorHandler(async (req, res) => {
         name,
         phone,
         number_of_people,
+        special_request,
     })
 
     res.status(StatusCodes.CREATED).json({

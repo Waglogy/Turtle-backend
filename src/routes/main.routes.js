@@ -10,7 +10,7 @@ const { tableRoutes } = require("./table_booking.routes")
 
 mainRoutes.use("/auth", checkAuth, signinRoutes)
 
-mainRoutes.use("/contact", isLoggedIn, contactRoutes)
+mainRoutes.use("/contact", contactRoutes)
 
 mainRoutes.use("/blog", blogRoute)
 
