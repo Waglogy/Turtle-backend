@@ -20,6 +20,10 @@ const tableBookingSchema = mongoose.Schema(
             required: true,
             trim: true,
         },
+        date: {
+            type: Date,
+            required: true,
+        },
     },
     { timestamps: true }
 )

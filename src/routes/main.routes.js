@@ -7,6 +7,7 @@ const isLoggedIn = require("../middleware/isLoggedIn.middleware")
 const { blogRoute } = require("./blog.routes")
 const { BlogModel } = require("../models/blog.model")
 const { tableRoutes } = require("./table_booking.routes")
+const { getBookings } = require("../controllers/table.controller")
 
 mainRoutes.use("/auth", checkAuth, signinRoutes)
 
@@ -15,6 +16,8 @@ mainRoutes.use("/contact", contactRoutes)
 mainRoutes.use("/blog", blogRoute)
 
 mainRoutes.use("/book-table", tableRoutes)
+
+mainRoutes.route("/bookings").get(getBookings)
 
 mainRoutes.route("/posts").get(async (req, res) => {
     const blogs = await BlogModel.find()
