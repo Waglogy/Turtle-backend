@@ -47,8 +47,6 @@ app.all("*", (req, res) => {
 })
 
 app.use((err, req, res, next) => {
-    console.log(err)
-
     if (err instanceof ApiError)
         res.status(err.statusCode).json({
             status: false,

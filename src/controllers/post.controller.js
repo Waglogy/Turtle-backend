@@ -2,6 +2,7 @@ const { PostModel } = require("../models/post.model")
 const asyncErrorHandler = require("../utils/asyncErrorHandler")
 const { imageUploader, imageRemover } = require("../utils/imageHandler")
 const mongoose = require("mongoose")
+const { StatusCodes } = require("http-status-codes")
 
 const addPost = asyncErrorHandler(async (req, res) => {
     const { title, content } = req.body
@@ -71,9 +72,7 @@ const deletePost = asyncErrorHandler(async (req, res) => {
         })
     }
 
-    const image_delete_response = await imageRemover(result.imageId)
-
-    console.log(image_delete_response)
+    await imageRemover(result.imageId)
 
     res.status(StatusCodes.OK).json({
         message: "Post deleted successfully",
