@@ -14,9 +14,9 @@ mainRoutes.use("/auth", checkAuth, signinRoutes)
 
 mainRoutes.route("/all-posts").get(getPosts)
 
-mainRoutes.use("/", isLoggedIn, dashboardRoutes)
-
 mainRoutes.use("/contact", contactRoutes)
+
+mainRoutes.use("/", isLoggedIn, dashboardRoutes)
 
 mainRoutes.use("/addpost", postRoute)
 
