@@ -14,13 +14,13 @@ mainRoutes.use("/auth", checkAuth, signinRoutes)
 
 mainRoutes.route("/all-posts").get(getPosts)
 
+mainRoutes.use("/book-table", tableRoutes)
+
 mainRoutes.use("/contact", contactRoutes)
 
 mainRoutes.use("/", isLoggedIn, dashboardRoutes)
 
 mainRoutes.use("/addpost", postRoute)
-
-mainRoutes.use("/book-table", tableRoutes)
 
 mainRoutes.route("/bookings").get(getBookings)
 
