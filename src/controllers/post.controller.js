@@ -17,7 +17,7 @@ const addPost = asyncErrorHandler(async (req, res) => {
     const imageId = []
 
     for (const file of req.files) {
-        const image = await imageUploader(file.path, "blog")
+        const image = await imageUploader(file.path, "posts")
         imageUrl.push(image.secure_url)
         imageId.push(image.public_id)
     }
