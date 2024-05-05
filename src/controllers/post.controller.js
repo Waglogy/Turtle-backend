@@ -9,7 +9,8 @@ const addPost = asyncErrorHandler(async (req, res) => {
 
     if (!title || !content || !req.files)
         return res.status(400).json({
-            message: "Please fill all fields",
+            message:
+                "Please ensure all fields are filled out before submitting the form. Thank you.",
             status: false,
         })
 
@@ -58,7 +59,8 @@ const deletePost = asyncErrorHandler(async (req, res) => {
     const { id } = req.query
     if (!id || !mongoose.Types.ObjectId.isValid(id)) {
         return res.status(StatusCodes.BAD_REQUEST).json({
-            message: "Please provide the valid post id",
+            message:
+                "Please provide a valid post ID to proceed with the deletion. Thank you.",
             status: false,
         })
     }
@@ -67,7 +69,8 @@ const deletePost = asyncErrorHandler(async (req, res) => {
 
     if (result === null) {
         return res.status(StatusCodes.NOT_FOUND).json({
-            message: "Post not found",
+            message:
+                "The post you are attempting to delete does not exist in the records. It may have already been removed or does not match any existing posts. Please verify the post details and try again.",
             status: false,
         })
     }
@@ -75,7 +78,8 @@ const deletePost = asyncErrorHandler(async (req, res) => {
     await imageRemover(result.imageId)
 
     res.status(StatusCodes.OK).json({
-        message: "Post deleted successfully",
+        message:
+            "Post successfully deleted. It has been removed from system. Thank you for managing your posts.",
         status: true,
     })
 })

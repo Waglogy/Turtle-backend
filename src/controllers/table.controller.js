@@ -27,13 +27,16 @@ const bookTable = asyncErrorHandler(async (req, res) => {
     if (!captchaData.success)
         return res.status(400).json({
             status: false,
-            message: "Captcha Verification Failed. Please try again.",
+            message:
+                "The CAPTCHA verification failed. Please try again to ensure that you are not a robot.",
         })
 
     if (!name || !phone || !number_of_people || !special_request || !date)
-        return res
-            .status(StatusCodes.BAD_REQUEST)
-            .json({ message: "Please fill in all fields", success: false })
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            message:
+                "Please ensure all fields are filled out before submitting the form. Thank you.",
+            success: false,
+        })
 
     await TableBookingModel.create({
         name,
@@ -44,7 +47,8 @@ const bookTable = asyncErrorHandler(async (req, res) => {
     })
 
     res.status(StatusCodes.CREATED).json({
-        message: "Table booked",
+        message:
+            "Your table has been successfully booked. We look forward to welcoming you!",
         success: true,
     })
 })
@@ -63,7 +67,8 @@ const deleteBookings = asyncErrorHandler(async (req, res) => {
     if (!id || !mongoose.isValidObjectId(id))
         return res.status(400).json({
             success: false,
-            message: "Invalid ID",
+            message:
+                "Please provide a valid booking ID to proceed with the deletion. Thank you.",
         })
 
     const deleteBooking = await TableBookingModel.findByIdAndDelete(id)
@@ -71,12 +76,14 @@ const deleteBookings = asyncErrorHandler(async (req, res) => {
     if (deleteBooking === null || deleteBooking.length < 0)
         return res.status(404).json({
             success: false,
-            message: "Contact not found.",
+            message:
+                "The booking you are attempting to delete does not exist in your records. It may have already been removed or does not match any existing posts. Please verify the booking details and try again.",
         })
 
     res.status(200).json({
         success: true,
-        message: "Contact deleted successfully.",
+        message:
+            "Booking successfully deleted. It has been removed from the system. Thank you for managing your bookings.",
     })
 })
 
