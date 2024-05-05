@@ -25,11 +25,13 @@ app.use(
     })
 )
 
-app.use(
-    cors({
-        origin: process.env.CORS_ORIGIN,
-    })
-)
+// app.use(
+//     cors({
+//         origin: process.env.CORS_ORIGIN,
+//     })
+// )
+
+app.use(cors())
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
