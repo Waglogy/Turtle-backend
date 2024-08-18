@@ -6,7 +6,7 @@ const mongoose = require("mongoose")
 const bookTable = asyncErrorHandler(async (req, res) => {
     const { name, phone, number_of_people, special_request, date } = req.body
 
-    const captcha = req.body["g-recaptcha-response"]
+    /* const captcha = req.body["g-recaptcha-response"]
 
     const params = new URLSearchParams({
         secret: process.env.RECAPTCHA_SECRET,
@@ -30,7 +30,7 @@ const bookTable = asyncErrorHandler(async (req, res) => {
             message:
                 "The CAPTCHA verification failed. Please try again to ensure that you are not a robot.",
         })
-
+ */
     if (!name || !phone || !number_of_people || !special_request || !date)
         return res.status(StatusCodes.BAD_REQUEST).json({
             message:
