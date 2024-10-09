@@ -5,9 +5,9 @@ const mongoose = require("mongoose")
 const { StatusCodes } = require("http-status-codes")
 
 const addPost = asyncErrorHandler(async (req, res) => {
-    const { title, content } = req.body
+    const { title, content, upcoming_date } = req.body
 
-    if (!title || !content || !req.files)
+    if (!title || !content || !upcoming_date || !req.files)
         return res.status(400).json({
             message:
                 "Please ensure all fields are filled out before submitting the form. Thank you.",
@@ -26,6 +26,7 @@ const addPost = asyncErrorHandler(async (req, res) => {
     await PostModel.create({
         title,
         content,
+        upcoming_date,
         image: imageUrl,
         imageId: imageId,
     })

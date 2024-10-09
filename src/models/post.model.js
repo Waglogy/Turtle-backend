@@ -12,6 +12,10 @@ const postSchema = new mongoose.Schema(
             required: true,
             trim: true,
         },
+        upcoming_date: {
+            type: Date,
+            required: true,
+        },
         image: [],
         imageId: [],
     },

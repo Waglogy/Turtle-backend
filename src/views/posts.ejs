@@ -491,6 +491,13 @@
                                         >
                                             Description: <%= data[i].content %>
                                         </h6>
+                                        <h6
+                                            class="mb-4 font-regular dark:text-gray-300"
+                                        >
+                                            Upcoming Date: <%= new
+                                            Date(data[i].upcoming_date).toDateString()
+                                            %>
+                                        </h6>
                                         <h4
                                             class="mb-4 font-semibold dark:text-gray-300"
                                         >
