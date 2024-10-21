@@ -21,6 +21,8 @@
     <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css " rel="stylesheet">
     <!-- Sweet Alerts -->
 
+    <link rel="stylesheet" href="assets/css/style.css">
+
     <style>
         textarea::placeholder {
             color: #413f3f;
@@ -314,16 +316,35 @@
                                     placeholder="Enter Your Title" name="upcoming_date">
 
 
-                                <div class="input-file"
+                                    <div class="input-type">
+                                        <label for="link" class="ml-4" style="color: white;">YouTube Video</label>
+                                        <input type="radio" name="media" value="type-link" class="input-type" onclick="inputClick('link')">
+                                        <label for="image" style="color: white;" >Image</label>
+                                        <input type="radio" name="media" value="type-file" class="input-type"
+                                        onclick="inputClick('image')"
+                                        >
+                                    </div>
+
+
+                                <div class="input-file hidden"
                                     style=" width: 15rem; height: 3rem; border:2px solid #7e3af2; border-radius: 1rem; color: #413f3f;  background: white;">
 
 
-                                    <input type="file" accept="image/*" id="files" class="hidden" name="image" multiple
-                                        onchange="onChangeHandler()">
+                                    <input type="file" accept="image/*" id="files" class="hidden" name="image" 
+                                        onchange="onChangeHandler()" >
                                     <label for="files" class="custom-label"
                                         style=" border-radius: 1rem;  display: block;  width: 15rem; height: 3rem; text-align: left; padding: 10px 13px; font-weight: 500;">Upload
                                         Image</label>
                                 </div>
+
+                                <div class="input-ytlink hidden">
+                                    <input type="url"
+                                    style=" border-radius: 1rem;  display: block;  width: 15rem; height: 3rem; text-align: left; padding: 10px 13px; font-weight: 500;border:2px solid #7e3af2; border-radius: 1rem; color: #413f3f;"
+                                    placeholder="Enter YouTube Link" name="ytlink" >
+                                </div>
+
+                               
+
                                 <span id="thiSpan" style="display: flex; justify-content:start;">
                                     <img src="#" alt="" id="blah" alt="lo" />
                                 </span>
@@ -363,7 +384,7 @@
 
         </div>
     </div>
-
+<script src="assets/js/input.js"></script>
 
 
 </body>

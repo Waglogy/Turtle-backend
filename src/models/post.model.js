@@ -16,8 +16,20 @@ const postSchema = new mongoose.Schema(
             type: Date,
             required: true,
         },
-        image: [],
-        imageId: [],
+
+        yt_link: {
+            type: String,
+        },
+
+        image: {
+            type: String,
+        },
+        imageId: String,
+
+        isFile: {
+            type: Boolean,
+            required: true,
+        },
     },
     { timestamps: true }
 )

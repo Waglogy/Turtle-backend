@@ -11,7 +11,7 @@ const postRoute = require("express").Router()
 
 postRoute.route("/").get(isLoggedIn, renderPost)
 
-postRoute.route("/").post(isLoggedIn, multer.array("image"), addPost)
+postRoute.route("/").post(isLoggedIn, multer.single("image"), addPost)
 
 postRoute.route("/all").get(getPosts)
 
