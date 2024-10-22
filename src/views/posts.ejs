@@ -97,7 +97,9 @@
                                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
                                             ></path>
                                         </svg>
-                                        <span class="ml-4">Forms</span>
+                                        <span class="ml-4"
+                                            >Add Upcoming Updates</span
+                                        >
                                     </a>
                                 </li>
 
@@ -277,7 +279,9 @@
                                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
                                             ></path>
                                         </svg>
-                                        <span class="ml-4">Forms</span>
+                                        <span class="ml-4"
+                                            >Add Upcoming Updates</span
+                                        >
                                     </a>
                                 </li>
 
@@ -505,13 +509,25 @@
                                             data[i].createdAt.toDateString() %>
                                         </h4>
 
-                                        <% data[i].image.forEach((image)=>{ %>
+                                        <% if(data[i].isFile) {%>
                                         <img
                                             class="object-cover w-30 h-10"
-                                            src="<%= image %>"
+                                            src="<%= data[i].image %>"
                                             alt="image"
                                         />
-                                        <% }) %>
+                                        <%} else {%>
+                                        <iframe
+                                            width="560"
+                                            height="315"
+                                            src="https://www.youtube.com/embed/<%= data[i].yt_link.split('v=')[1] %>"
+                                            title="YouTube video player"
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen
+                                        >
+                                        </iframe>
+
+                                        <%}%>
                                     </div>
 
                                     <% } %>
